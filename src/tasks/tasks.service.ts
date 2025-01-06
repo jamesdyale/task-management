@@ -29,6 +29,24 @@ export class TasksService {
     return task;
   }
 
+  updateTask(id: string, status: TaskStatus): Task {
+    const task = this.getTaskById(id);
+
+    const newUpdatedTask: Task = {
+      ...task,
+      status,
+    };
+
+    this.tasks = this.tasks.map((task) => {
+      if (task.id === id) {
+        return newUpdatedTask;
+      }
+      return task;
+    });
+
+    return newUpdatedTask;
+  }
+
   deleteTask(id: string): void {
     this.tasks = this.tasks.filter((task) => task.id !== id);
   }
